@@ -1,30 +1,41 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 
-interface FoodNode {
+// interface FoodNode {
+//   name: string;
+//   children?: FoodNode[];
+// }
+
+interface MenuItem {
+  id: number;
   name: string;
-  children?: FoodNode[];
+  parentID: number;
+  order: number;
 }
 
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Fruit',
-    children: [{name: 'Apple'}, {name: 'Banana'}, {name: 'Fruit loops'}],
-  },
-  {
-    name: 'Vegetables',
-    children: [
-      {
-        name: 'Green',
-        children: [{name: 'Broccoli'}, {name: 'Brussels sprouts'}],
-      },
-      {
-        name: 'Orange',
-        children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
-      },
-    ],
-  },
+interface NestedMenuItem {
+  id: number;
+  name: string;
+  order: number;
+  children?: NestedMenuItem[];
+}
+
+// 下面的数据是后台返回的
+const flatMenuData: MenuItem[] = [
+  { id: 1, name: "新闻", parentID: 0, order: 0 },
+  { id: 2, name: "国内新闻", parentID: 1, order: 1 },
+  { id: 3, name: "编程语言", parentID: 0, order: 0 },
+  { id: 4, name: "国际新闻", parentID: 1, order: 2 },
+  { id: 5, name: "C++", parentID: 3, order: 2 },
+  { id: 6, name: "Golang", parentID: 3, order: 1 },
+  { id: 7, name: "菜单", parentID: 0, order: 0 },
+  { id: 8, name: "中餐", parentID: 7, order: 1 },
+  { id: 9, name: "娱乐", parentID: 2, order: 1 },
+  { id: 10, name: "旅游", parentID: 2, order: 2 },
+  { id: 11, name: "娱乐新闻", parentID: 1, order: 4 },
+  { id: 12, name: "西餐", parentID: 7, order: 4 },
 ];
 
 /**
@@ -45,7 +56,9 @@ interface ExampleFlatNode {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  private _transformer = (node: FoodNode, level: number) => {
+  TREE_DATA: NestedMenuItem[] = [];
+
+  private _transformer = (node: NestedMenuItem, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
@@ -68,9 +81,48 @@ export class AppComponent implements OnInit {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   constructor() {
-    this.dataSource.data = TREE_DATA;
+    this.TREE_DATA = buildNestedMenu(flatMenuData, 0);
+    this.dataSource.data = this.TREE_DATA;
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   ngOnInit() {}
+
+  drop(event: CdkDragDrop<NestedMenuItem[]>) {
+    // console.log(event);
+    const prevIndex = event.previousIndex;
+    const newIndex = event.currentIndex;
+
+    moveItemInArray(this.TREE_DATA, prevIndex, newIndex);
+    this.dataSource.data = this.TREE_DATA;
+  }
+}
+
+// 后端数据转化为有层次结构的数据
+function buildNestedMenu(menuItems: MenuItem[], parentID: number | null = null): NestedMenuItem[] {
+  const nestedMenu: NestedMenuItem[] = [];
+
+  const filteredItems = menuItems.filter(item => item.parentID === parentID);
+
+  // 输出筛选后的菜单项，以进行调试
+  // console.log('Filtered Items:', filteredItems);
+
+  filteredItems.sort((a, b) => a.order - b.order);
+
+  for (const menuItem of filteredItems) {
+    const nestedMenuItem: NestedMenuItem = {
+      id: menuItem.id,
+      name: menuItem.name,
+      order: menuItem.order,
+    };
+
+    const children = buildNestedMenu(menuItems, menuItem.id);
+    if (children.length > 0) {
+      nestedMenuItem.children = children;
+    }
+
+    nestedMenu.push(nestedMenuItem);
+  }
+
+  return nestedMenu;
 }
