@@ -25,7 +25,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTreeModule} from '@angular/material/tree'
 import {CdkTreeModule} from '@angular/cdk/tree';
-
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 let materials = [
   CommonModule,
@@ -52,6 +52,7 @@ let materials = [
   MatChipsModule,
   MatTreeModule,
   CdkTreeModule,
+  DragDropModule
 ];
 
 @NgModule({
