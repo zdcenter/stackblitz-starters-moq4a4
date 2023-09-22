@@ -1,4 +1,7 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray,  CdkDrag,
+  CdkDragPlaceholder,
+  CdkDropList,
+ } from '@angular/cdk/drag-drop';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
@@ -78,18 +81,21 @@ export class AppComponent implements OnInit {
 
   constructor() {
     this.TREE_DATA = buildNestedMenu(flatMenuData, 0);
+    console.log(this.TREE_DATA)
     this.dataSource.data = this.TREE_DATA;
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   ngOnInit() {}
 
-  drop(event: CdkDragDrop<NestedMenuItem[]>) {
+  drop(event: CdkDragDrop<NestedMenuItem[]>): void {
+
+
     const prevIndex = event.previousIndex;
     const newIndex = event.currentIndex;
     console.log(prevIndex, newIndex)
 
-    // 下面数据是乱写的
+    // // 下面数据是乱写的
     moveItemInArray(this.TREE_DATA, prevIndex, newIndex);
     this.dataSource.data = this.TREE_DATA;
   }
