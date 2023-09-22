@@ -85,7 +85,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {}
 
   drop(event: CdkDragDrop<NestedMenuItem[]>) {
-    // console.log(event);
     const prevIndex = event.previousIndex;
     const newIndex = event.currentIndex;
     console.log(prevIndex, newIndex)
