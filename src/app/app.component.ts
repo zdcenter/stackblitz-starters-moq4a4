@@ -3,11 +3,6 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 
-// interface FoodNode {
-//   name: string;
-//   children?: FoodNode[];
-// }
-
 interface MenuItem {
   id: number;
   name: string;
@@ -35,7 +30,7 @@ const flatMenuData: MenuItem[] = [
   { id: 9, name: "娱乐", parentID: 2, order: 1 },
   { id: 10, name: "旅游", parentID: 2, order: 2 },
   { id: 11, name: "娱乐新闻", parentID: 1, order: 4 },
-  { id: 12, name: "西餐", parentID: 7, order: 4 },
+  { id: 12, name: "西餐", parentID: 7, order: 2 },
 ];
 
 /**
@@ -45,6 +40,7 @@ const flatMenuData: MenuItem[] = [
  *
  */
 interface ExampleFlatNode {
+
   expandable: boolean;
   name: string;
   level: number;
@@ -92,7 +88,9 @@ export class AppComponent implements OnInit {
     // console.log(event);
     const prevIndex = event.previousIndex;
     const newIndex = event.currentIndex;
+    console.log(prevIndex, newIndex)
 
+    // 下面数据是乱写的
     moveItemInArray(this.TREE_DATA, prevIndex, newIndex);
     this.dataSource.data = this.TREE_DATA;
   }
