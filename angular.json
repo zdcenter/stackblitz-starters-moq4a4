@@ -41,7 +41,7 @@
             "main": "src/main.ts",
             "outputPath": "dist/demo",
             "scripts": [],
-            "styles": ["src/styles.css"],
+            "styles": ["src/styles.scss"],
             "tsConfig": "src/tsconfig.app.json"
           }
         },
@@ -78,7 +78,7 @@
             "main": "src/test.ts",
             "polyfills": [],
             "scripts": [],
-            "styles": ["styles.css"],
+            "styles": ["styles.scss"],
             "tsConfig": "src/tsconfig.spec.json"
           }
         }
