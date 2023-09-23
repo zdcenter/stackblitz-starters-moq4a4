@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material.module';
 import { FlattreeComponent } from './components/flattree/flattree.component';
+import { NestedtreeComponent } from './components/nestedtree/nestedtree.component';
 
 @NgModule({
   imports: [CommonModule, BrowserModule, AppRoutingModule, MaterialModule],
 
-  declarations: [AppComponent, FlattreeComponent],
+  declarations: [AppComponent, FlattreeComponent, NestedtreeComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

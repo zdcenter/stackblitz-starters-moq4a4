@@ -109,7 +109,7 @@ export class NestedtreeComponent implements OnInit {
     const prevIndex = event.previousIndex;
     const newIndex = event.currentIndex;
     console.log(prevIndex, newIndex)
-    console.log(TREE_DATA[newIndex].id,TREE_DATA[newIndex].name);
+    // console.log(TREE_DATA[newIndex].id,TREE_DATA[newIndex].name);
   
 
     // // 下面数据是乱写的
