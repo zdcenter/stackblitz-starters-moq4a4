@@ -1,0 +1,35 @@
+<cdk-tree [dataSource]="dataSource" [treeControl]="treeControl" cdkDropList (cdkDropListDropped)="drop($event)"
+  class="example-list">
+  <!-- This is the tree node template for leaf nodes -->
+  <cdk-tree-node *cdkTreeNodeDef="let node" cdkTreeNodePadding 
+    class="example-tree-node example-box" cdkDrag>
+    <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+
+    <!-- use a disabled button to provide padding for tree leaf -->
+    <div class="nav-title-container">
+      <button mat-icon-button disabled></button>
+      {{node.title}}
+    </div>
+    <div class="nav-edit-container">
+      <mat-icon color="accent" class="nav-edit-icon" matTooltip="编辑" matTooltipPosition="below">edit</mat-icon>
+      <mat-icon color="warn" matTooltip="删除" matTooltipPosition="below">delete</mat-icon>
+    </div>
+  </cdk-tree-node>
+  <!-- This is the tree node template for expandable nodes -->
+  <cdk-tree-node *cdkTreeNodeDef="let node; when: hasChild" cdkTreeNodePadding  class="example-tree-node example-box" cdkDrag>
+    <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+    <div class="nav-title-container">
+      <button mat-icon-button cdkTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name"
+        (click)="node.isExpanded = !node.isExpanded" [style.visibility]="node.expandable ? 'visible' : 'hidden'">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      {{node.title}}
+    </div>
+    <div class="nav-edit-container">
+      <mat-icon class="nav-edit-icon" color="primary" matTooltip="编辑" matTooltipPosition="below">edit</mat-icon>
+      <mat-icon color="warn" matTooltip="删除" matTooltipPosition="below">delete</mat-icon>
+    </div>
+  </cdk-tree-node>
+</cdk-tree>

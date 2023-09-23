@@ -1,7 +1,8 @@
+import { Component, OnInit } from '@angular/core';
 import { ArrayDataSource } from '@angular/cdk/collections';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit } from '@angular/core';
+
 
 /**
  * Food data with nested structure.
@@ -108,10 +109,10 @@ export class NestedtreeComponent implements OnInit {
 
     const prevIndex = event.previousIndex;
     const newIndex = event.currentIndex;
-    console.log(prevIndex, newIndex)
-    // console.log(TREE_DATA[newIndex].id,TREE_DATA[newIndex].name);
-  
 
+    console.log(prevIndex, newIndex)
+    console.log(TREE_DATA[4].id,TREE_DATA[4].name);
+  
     // // 下面数据是乱写的
     moveItemInArray(TREE_DATA, prevIndex, newIndex);
     // this.dataSource= TREE_DATA;

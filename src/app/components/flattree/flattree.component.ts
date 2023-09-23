@@ -1,6 +1,7 @@
+
+import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop,  moveItemInArray } from '@angular/cdk/drag-drop';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 interface MenuItem {
@@ -88,11 +89,10 @@ export class FlattreeComponent implements OnInit {
   ngOnInit() {}
 
   drop(event: CdkDragDrop<NestedMenuItem[]>): void {
-    console.log(event.previousContainer)
     const prevIndex = event.previousIndex;
     const newIndex = event.currentIndex;
     console.log(prevIndex, newIndex)
-    // console.log(this.TREE_DATA[newIndex].id, this.TREE_DATA[newIndex].name);
+    console.log(this.TREE_DATA[newIndex].id, this.TREE_DATA[newIndex].name);
   
 
     // // 下面数据是乱写的

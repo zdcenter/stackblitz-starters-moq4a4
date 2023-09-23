@@ -52,7 +52,7 @@ let materials = [
   MatChipsModule,
   MatTreeModule,
   CdkTreeModule,
-  DragDropModule
+  DragDropModule,
 ];
 
 @NgModule({
