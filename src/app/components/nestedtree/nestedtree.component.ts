@@ -105,16 +105,17 @@ export class NestedtreeComponent implements OnInit {
 
 
   drop(event: CdkDragDrop<FoodNode[]>)  {
-    console.log(event.previousContainer)
+
     const prevIndex = event.previousIndex;
     const newIndex = event.currentIndex;
     console.log(prevIndex, newIndex)
-    // console.log(this.TREE_DATA[newIndex].id, this.TREE_DATA[newIndex].name);
+    console.log(TREE_DATA[newIndex].id,TREE_DATA[newIndex].name);
   
 
     // // 下面数据是乱写的
     moveItemInArray(TREE_DATA, prevIndex, newIndex);
     // this.dataSource= TREE_DATA;
-    this.treeControl.dataNodes = [...this.treeControl.dataNodes];
+    // this.treeControl.collapseAll();
+    // this.treeControl.expandAll();
   }
 }
