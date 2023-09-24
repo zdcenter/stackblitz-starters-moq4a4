@@ -33,15 +33,15 @@ let roles: Role[] = [
 })
 export class TesttreeComponent implements OnInit {
   treeData: Role[] = [];
-  treeControl = new NestedTreeControl<Role>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<Role>();
+  // treeControl = new NestedTreeControl<Role>(node => node.children);
+  // dataSource = new MatTreeNestedDataSource<Role>();
 
-  hasChild = (_: number, node: Role) => !! node.children && node.children.length > 0;
+  // hasChild = (_: number, node: Role) => !! node.children && node.children.length > 0;
 
   constructor() { 
-    this.treeData =  buildTree(roles, 0);
-    console.log(this.treeData);
-    this.dataSource.data = this.treeData;
+    // this.treeData =  buildTree(roles, 0);
+    // console.log(this.treeData);
+    // this.dataSource.data = this.treeData;
   }
 
   ngOnInit() {
