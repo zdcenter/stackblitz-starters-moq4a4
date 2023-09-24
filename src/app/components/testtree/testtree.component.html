@@ -1,0 +1,22 @@
+<!-- role-tree.component.html -->
+
+<mat-tree [dataSource]="dataSource"  [treeControl]="treeControl" cdkDropList (cdkDropListDropped)="onDrop($event)">
+  <mat-tree-node
+    *matTreeNodeDef="let node"
+    matTreeNodePadding
+    cdkDrag
+  >
+    {{ node.name }}
+  </mat-tree-node>
+  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+    <button mat-icon-button matTreeNodePadding>
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+      </mat-icon>
+    </button>
+    {{ node.name }}
+    <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+      <ng-container matTreeNodeOutlet></ng-container>
+    </ul>
+  </mat-nested-tree-node>
+</mat-tree>

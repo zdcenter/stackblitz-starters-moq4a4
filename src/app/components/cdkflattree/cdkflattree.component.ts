@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ArrayDataSource } from '@angular/cdk/collections';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FlatTreeControl } from '@angular/cdk/tree';
-
 
 const oldNavs: Nav[] = [
   { id: 1, title: "新闻", url: "", parent_id: 0 },

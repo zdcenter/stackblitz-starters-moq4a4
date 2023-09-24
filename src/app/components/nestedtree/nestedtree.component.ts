@@ -3,7 +3,6 @@ import { ArrayDataSource } from '@angular/cdk/collections';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NestedTreeControl } from '@angular/cdk/tree';
 
-
 /**
  * Food data with nested structure.
  * Each node has a name and an optional list of children.
